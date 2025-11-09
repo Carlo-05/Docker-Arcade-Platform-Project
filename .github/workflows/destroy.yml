@@ -1,0 +1,85 @@
+name: Infra
+
+workflow_call:
+    inputs:
+        environment:
+            required: true
+            type: string
+    secrets:
+        IAM_ROLE_ARN:
+            required: true
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    terraform-deploy:
+        name: Infrastructure Deployment
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}
+        defaults:
+            run:
+                working-directory: terraform/${{ inputs.environment }}
+
+        env:
+            # VPC
+            TF_VAR_select_region: ${{ vars.AWS_REGION }}
+            TF_VAR_cidr_block: ${{ vars.VPC_CIDR_BLOCK }}
+            TF_VAR_public_subnet_count: ${{ vars.PUBLIC_SUBNET_COUNT }}
+            TF_VAR_private_subnet_count: ${{ vars.PRIVATE_SUBNET_COUNT }}
+
+
+            #EC2
+            TF_VAR_select_ami: ${{ vars.EC2_AMI }}
+            TF_VAR_instance_type: ${{ vars.EC2_INSTANCE_TYPE }}
+            TF_VAR_key_name: ${{ vars.EC2_KEY_NAME }}
+
+            #tags
+            # local tag
+            TF_VAR_ProjectName: ${{ vars.PROJECT_NAME }}
+            TF_VAR_env: ${{ inputs.environment }}
+
+            #vpc tag
+            TF_VAR_vpc_tag: ${{ vars.VPC_TAG }}
+            TF_VAR_igw_tag: ${{ vars.IGW_TAG }}
+            TF_VAR_public_subnet_tag: ${{ vars.PUBLIC_SUBNET_TAG }}
+            TF_VAR_private_subnet_tag: ${{ vars.PRIVATE_SUBNET_TAG }}
+            TF_VAR_public_RT_tag: ${{ vars.PUBLIC_RT_TAG }}
+            TF_VAR_private_RT_tag: ${{ vars.PRIVATE_RT_TAG }}
+            #SG tag
+            TF_VAR_ec2_practice_SGtag: ${{ vars.EC2_PRACTICE_SG_TAG }}
+            #ec2 tag
+            TF_VAR_ec2_practice_tag: ${{ vars.EC2_PRACTICE_TAG }}
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v3
+
+            - name: AWS credential
+              uses: aws-actions/configure-aws-credentials@v3
+              with: 
+                    role-to-assume: ${{ secrets.IAM_ROLE_ARN }}
+                    aws-region: ${{ vars.AWS_REGION }}
+            
+            - name: Terraform Format Check
+              run: terraform fmt -recursive
+
+            - name: Terraform Init
+              run: |
+                terraform init \
+                    -backend-config="bucket=${{ vars.BACKEND_BUCKET }}" \
+                    -backend-config="key=${{ vars.BACKEND_KEY }}" \
+                    -backend-config="region=${{ vars.BACKEND_REGION }}"
+
+            - name: Terraform Validate
+              run: terraform validate
+
+            - name: Terraform Plan Destroy
+              run: terraform plan -destroy
+
+            - name: Terraform destroy
+              run: terraform destroy -auto-approve

@@ -1,0 +1,24 @@
+name: Master
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deveopment Stage"
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    call-infra:
+        uses: ./.github/workflows/infra.yml
+        with:
+            environment: ${{ github.event.inputs.environment }}
+        secrets: 
+            IAM_ROLE_ARN: ${{ secrets.IAM_ROLE_ARN }}
