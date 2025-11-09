@@ -1,14 +1,15 @@
 name: Destroy
 
 on:
-    workflow_call:
+    workflow_dispatch:
         inputs:
-            environment:
-                required: true
-                type: string
-        secrets:
-            IAM_ROLE_ARN:
-                required: true
+          environment:
+            description: "Deveopment Stage"
+            required: true
+            default: dev
+            type: choice
+            options:
+              - dev
 
 permissions:
     id-token: write
@@ -85,4 +86,5 @@ jobs:
             - name: Terraform destroy
 
               run: terraform destroy -auto-approve
+
 
