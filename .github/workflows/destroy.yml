@@ -1,4 +1,4 @@
-name: Infra
+name: Destroy
 
 on:
     workflow_call:
@@ -85,3 +85,4 @@ jobs:
             - name: Terraform destroy
 
               run: terraform destroy -auto-approve
+
