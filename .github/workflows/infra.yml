@@ -31,14 +31,14 @@ jobs:
 
 
             #EC2
-            TF_VAR_select_ami: ${{ vars.EC2_AMI }}
-            TF_VAR_instance_type: ${{ vars.EC2_INSTANCE_TYPE }}
-            TF_VAR_key_name: ${{ vars.EC2_KEY_NAME }}
+            TF_VAR_select_ami: ${{ vars.SELECT_AMI }}
+            TF_VAR_instance_type: ${{ vars.INSTANCE_TYPE }}
+            TF_VAR_key_name: ${{ vars.KEY_NAME }}
 
             #tags
             # local tag
-            TF_VAR_ProjectName: ${{ vars.PROJECT_NAME }}
-            TF_VAR_env: ${{ inputs.environment }}
+            TF_VAR_ProjectName: ${{ vars.PROJECTNAME }}
+            TF_VAR_env: ${{ vars.ENV }}
 
             #vpc tag
             TF_VAR_vpc_tag: ${{ vars.VPC_TAG }}
@@ -48,7 +48,7 @@ jobs:
             TF_VAR_public_RT_tag: ${{ vars.PUBLIC_RT_TAG }}
             TF_VAR_private_RT_tag: ${{ vars.PRIVATE_RT_TAG }}
             #SG tag
-            TF_VAR_ec2_practice_SGtag: ${{ vars.EC2_PRACTICE_SG_TAG }}
+            TF_VAR_ec2_practice_SGtag: ${{ vars.EC2_PRACTICE_SGTAG }}
             #ec2 tag
             TF_VAR_ec2_practice_tag: ${{ vars.EC2_PRACTICE_TAG }}
 
@@ -84,3 +84,4 @@ jobs:
             - name: Terraform Apply
 
               run: terraform apply -auto-approve
+
