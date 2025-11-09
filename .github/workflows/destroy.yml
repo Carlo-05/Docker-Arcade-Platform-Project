@@ -1,13 +1,14 @@
 name: Infra
 
-workflow_call:
-    inputs:
-        environment:
-            required: true
-            type: string
-    secrets:
-        IAM_ROLE_ARN:
-            required: true
+on:
+    workflow_call:
+        inputs:
+            environment:
+                required: true
+                type: string
+        secrets:
+            IAM_ROLE_ARN:
+                required: true
 
 permissions:
     id-token: write
@@ -82,4 +83,5 @@ jobs:
               run: terraform plan -destroy
 
             - name: Terraform destroy
+
               run: terraform destroy -auto-approve
