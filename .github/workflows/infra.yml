@@ -24,7 +24,7 @@ jobs:
 
         env:
             # VPC
-            TF_VAR_select_region: ${{ vars.AWS_REGION }}
+            TF_VAR_select_region: ${{ vars.SELECT_REGION }}
             TF_VAR_cidr_block: ${{ vars.VPC_CIDR_BLOCK }}
             TF_VAR_public_subnet_count: ${{ vars.PUBLIC_SUBNET_COUNT }}
             TF_VAR_private_subnet_count: ${{ vars.PRIVATE_SUBNET_COUNT }}
@@ -82,4 +82,5 @@ jobs:
               run: terraform plan
 
             - name: Terraform Apply
+
               run: terraform apply -auto-approve
