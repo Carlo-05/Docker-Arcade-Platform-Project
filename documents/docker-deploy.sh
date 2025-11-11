@@ -66,11 +66,22 @@ cd $HOME_DIR/platform
 
 # download script and execute
 for i in {1..5}; do
-    if curl -fsSL -o /$HOME_DIR/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/CI-CD-Github-Actions-Terraform-Project/refs/heads/main/Other%20Documents/employees.sql; then
+    if curl -fsSL -o /$HOME_DIR/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
         echo "docker-compose file download succeeded"
         break
     else
         echo "Attempt downloading docker-compose file failed, retrying in 10s..."
         sleep 10
+    fi
+    done
+
+# download nginx config file
+for i in {1..5}; do
+    if curl -fsSL -o /$HOME_DIR/platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
+        echo "nginx.conf file download succeeded"
+        break
+    else
+        echo "Attempt downloading nginx.conf file failed, retrying in 10s..."
+        sleep 5
     fi
     done
