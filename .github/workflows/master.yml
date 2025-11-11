@@ -22,3 +22,13 @@ jobs:
             environment: ${{ github.event.inputs.environment }}
         secrets: 
             IAM_ROLE_ARN: ${{ secrets.IAM_ROLE_ARN }}
+
+    call-docker:
+        needs: call-infra
+        uses: ./.github/workflows/docker.yml
+        with:
+            environment: ${{ github.event.inputs.environment }}
+        secrets: 
+            EC2_PUBLIC_IP_: ${{ needs.terraform.outputs.EC2_PUBLIC_IP_DEV }}
+            EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+
