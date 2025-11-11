@@ -1,0 +1,39 @@
+name: Docker
+
+on:
+    workflow_call:
+        inputs:
+            environment:
+                required: true
+                type: string
+        secrets:
+            IAM_ROLE_ARN:
+                required: true
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+
+    docker-deploy:
+        name: Docker Deployment
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: SSH to EC2 and Deploy Docker Container
+              uses: appleboy/ssh-action@v0.1.10
+                with:
+                    host: ${{ inputs.EC2_PUBLIC_IP }}
+                    username: vars.SELECT_AMI == linux2 ? ec2-user : ubuntu
+                    key: ${{ secrets.EC2_SSH_KEY }}
+                    script: |
+                        HOME_DIR=$(eval echo ~$USER)
+
+                        cd $HOME_DIR/platform
+                        docker compose pull
+                        docker compose up -d --build
+
