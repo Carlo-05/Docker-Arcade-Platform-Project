@@ -29,6 +29,9 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
+            - name: Debug IP
+              run: echo "Connecting to ${{ inputs.EC2_PUBLIC_IP }}"
+
             - name: SSH to EC2 and Deploy Docker Container
               uses: appleboy/ssh-action@v0.1.10
               with:
@@ -41,6 +44,7 @@ jobs:
                     cd $HOME_DIR/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
