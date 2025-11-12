@@ -28,10 +28,11 @@ jobs:
         uses: ./.github/workflows/docker.yml
         with:
             environment: ${{ github.event.inputs.environment }}
-            EC2_PUBLIC_IP: ${{ needs.terraform.outputs.EC2_PUBLIC_IP_DEV }}
+            EC2_PUBLIC_IP: ${{ needs.terraform.outputs.EC2_PUBLIC_IP }}
         secrets: 
             IAM_ROLE_ARN: ${{ secrets.IAM_ROLE_ARN }}
             EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+
 
 
 
