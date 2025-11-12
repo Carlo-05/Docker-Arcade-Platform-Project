@@ -12,6 +12,8 @@ on:
         secrets:
             IAM_ROLE_ARN:
                 required: true
+            EC2_SSH_KEY:
+                required: true
 
 permissions:
     id-token: write
@@ -39,6 +41,7 @@ jobs:
                     cd $HOME_DIR/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
