@@ -10,7 +10,8 @@ on:
             IAM_ROLE_ARN:
                 required: true
         outputs:
-            value: ${{ jobs.terraform-deploy.outputs.EC2_PUBLIC_IP }}
+            EC2_PUBLIC_IP:
+                value: ${{ jobs.terraform-deploy.outputs.EC2_PUBLIC_IP }}
 
 permissions:
     id-token: write
@@ -100,6 +101,7 @@ jobs:
 
                 echo "EC2_PUBLIC_IP=$EC2_PUBLIC_IP" >> $GITHUB_OUTPUT
                 echo "the ip is $EC2_PUBLIC_IP"
+
 
 
 
