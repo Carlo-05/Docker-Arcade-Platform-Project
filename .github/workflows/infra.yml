@@ -1,4 +1,4 @@
-oname: Infra
+name: Infra
 
 on:
     workflow_call:
@@ -93,6 +93,7 @@ jobs:
               run: |
                 echo "EC2_PUBLIC_IP=$(terraform output -raw ec2_docker_public_ip)" >> $GITHUB_OUTPUT
                 echo "the ip is $EC2_PUBLIC_IP"
+
 
 
 
