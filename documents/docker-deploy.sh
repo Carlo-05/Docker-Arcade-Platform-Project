@@ -12,7 +12,6 @@ for i in {1..5}; do
           echo "mkdir failed, retrying in 5s..."
           sleep 5
         done
-cd /tmp/platform
 # Detect OS
 OS=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
 
@@ -65,7 +64,7 @@ if [[ "$OS" == "ubuntu" ]]; then
             sleep 5
         fi
         done
-
+    mv /tmp/platform /home/ubuntu/
 #######################################
 # Amazon Linux 2 Docker Installation
 #######################################
@@ -102,11 +101,10 @@ elif [[ "$OS" == "amzn" ]]; then
             sleep 5
         fi
         done
-
+    mv /tmp/platform /home/ec2-user/
 else
     echo "Unsupported OS: $OS"
     exit 1
 fi
-mv /tmp/platform ./
 echo "Docker installation complete!"
 
