@@ -60,11 +60,11 @@ jobs:
                 username: ${{ vars.SELECT_AMI == 'linux2' && 'ec2-user' || 'ubuntu' }}
                 key: ${{ secrets.EC2_SSH_KEY }}
                 script: |
-                    HOME_DIR=$(eval echo ~$USER)
 
-                    cd $HOME_DIR/platform
+                    cd /tmp/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
