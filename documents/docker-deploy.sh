@@ -38,11 +38,12 @@ if [[ "$OS" == "ubuntu" ]]; then
     systemctl start docker
     usermod -aG docker ubuntu
 
-    mkdir platform
-    cd platform
+    mkdir /tmp/platform
+    cd /tmp/platform
+
     # download script and execute
     for i in {1..5}; do
-        if curl -fsSL -o //platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
+        if curl -fsSL -o /tmp/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
             echo "docker-compose file download succeeded"
             break
         else
@@ -53,7 +54,7 @@ if [[ "$OS" == "ubuntu" ]]; then
 
     # download nginx config file
     for i in {1..5}; do
-        if curl -fsSL -o /platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
+        if curl -fsSL -o /tmp/platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
             echo "nginx.conf file download succeeded"
             break
         else
@@ -77,11 +78,11 @@ elif [[ "$OS" == "amzn" ]]; then
     # Add default user to docker group
     usermod -aG docker ec2-user
 
-    mkdir platform
-    cd platform
+    mkdir /tmp/platform
+    cd /tmp/platform
     # download script and execute
     for i in {1..5}; do
-        if curl -fsSL -o //platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
+        if curl -fsSL -o /tmp/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
             echo "docker-compose file download succeeded"
             break
         else
@@ -92,7 +93,7 @@ elif [[ "$OS" == "amzn" ]]; then
 
     # download nginx config file
     for i in {1..5}; do
-        if curl -fsSL -o /platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
+        if curl -fsSL -o /tmp/platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
             echo "nginx.conf file download succeeded"
             break
         else
