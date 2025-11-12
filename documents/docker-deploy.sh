@@ -7,6 +7,12 @@ set -x
 # Wait for the network and IAM
 sleep 10
 
+for i in {1..5}; do
+          mkdir -p /tmp/platform && break
+          echo "mkdir failed, retrying in 5s..."
+          sleep 5
+        done
+cd /tmp/platform
 # Detect OS
 OS=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
 
@@ -37,9 +43,6 @@ if [[ "$OS" == "ubuntu" ]]; then
     systemctl enable docker
     systemctl start docker
     usermod -aG docker ubuntu
-
-    mkdir /tmp/platform
-    cd /tmp/platform
 
     # download script and execute
     for i in {1..5}; do
@@ -78,8 +81,6 @@ elif [[ "$OS" == "amzn" ]]; then
     # Add default user to docker group
     usermod -aG docker ec2-user
 
-    mkdir /tmp/platform
-    cd /tmp/platform
     # download script and execute
     for i in {1..5}; do
         if curl -fsSL -o /tmp/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
