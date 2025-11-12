@@ -62,8 +62,8 @@ jobs:
                 script: |
 
                     cd /tmp/platform
-                    docker compose pull
                     docker compose up -d --build
+
 
 
 
