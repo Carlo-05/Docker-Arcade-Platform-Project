@@ -60,13 +60,12 @@ fi
 
 echo "Docker installation complete!"
 
-HOME_DIR=$(eval echo ~$USER)
-mkdir -p $HOME_DIR/platform
-cd $HOME_DIR/platform
+mkdir -p $HOME/platform
+cd $HOME/platform
 
 # download script and execute
 for i in {1..5}; do
-    if curl -fsSL -o /$HOME_DIR/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
+    if curl -fsSL -o /$HOME/platform/docker-compose.yml https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/docker-compose.yml; then
         echo "docker-compose file download succeeded"
         break
     else
@@ -77,7 +76,7 @@ for i in {1..5}; do
 
 # download nginx config file
 for i in {1..5}; do
-    if curl -fsSL -o /$HOME_DIR/platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
+    if curl -fsSL -o /$HOME/platform/nginx.conf https://raw.githubusercontent.com/Carlo-05/Docker-Arcade-Platform-Project/refs/heads/main/documents/nginx.conf; then
         echo "nginx.conf file download succeeded"
         break
     else
