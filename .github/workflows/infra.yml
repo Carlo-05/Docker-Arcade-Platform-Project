@@ -92,8 +92,13 @@ jobs:
               id: ec2_ip
               run: |
                 EC2_PUBLIC_IP=$(terraform output -raw ec2_docker_public_ip)
+                if [ -z "$EC2_PUBLIC_IP" ]; then
+                  echo "No IP retrieved from Terraform"
+                fi
+
                 echo "EC2_PUBLIC_IP=$EC2_PUBLIC_IP" >> $GITHUB_OUTPUT
                 echo "the ip is $EC2_PUBLIC_IP"
+
 
 
 
