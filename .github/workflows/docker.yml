@@ -31,7 +31,7 @@ jobs:
 
             - name: Debug IP
               run: |
-                  if [ "${{ inputs.EC2_PUBLIC_IP }}" != ""]; then
+                  if [ "${{ inputs.EC2_PUBLIC_IP }}" != "" ]; then
                       echo "IP available"
                   else
                       echo "No IP"
@@ -50,6 +50,7 @@ jobs:
                     cd $HOME_DIR/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
