@@ -60,9 +60,16 @@ jobs:
                 username: ${{ vars.SELECT_AMI == 'linux2' && 'ec2-user' || 'ubuntu' }}
                 key: ${{ secrets.EC2_SSH_KEY }}
                 script: |
+                    echo "Waiting for platform/..."
+                    while [ ! -d "platform/" ]; do
+                        echo "Still bootstrapping..."
+                        sleep 60
+                    done
+                    echo "Platform directory found!"
 
                     cd platform/
                     docker compose up -d --build
+
 
 
 
