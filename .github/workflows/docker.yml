@@ -6,6 +6,9 @@ on:
             environment:
                 required: true
                 type: string
+            EC2_PUBLIC_IP:
+                required: true
+                type: string
         secrets:
             IAM_ROLE_ARN:
                 required: true
@@ -36,6 +39,7 @@ jobs:
                     cd $HOME_DIR/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
