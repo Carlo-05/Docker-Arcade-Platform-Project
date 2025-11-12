@@ -24,6 +24,11 @@ jobs:
     docker-deploy:
         name: Docker Deployment
         runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}
+        defaults:
+            run:
+                working-directory: terraform/${{ inputs.environment }}
+            
 
         steps:
             - name: Checkout
@@ -60,6 +65,7 @@ jobs:
                     cd $HOME_DIR/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
