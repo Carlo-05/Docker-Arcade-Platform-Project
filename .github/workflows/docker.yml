@@ -38,6 +38,16 @@ jobs:
                   fi
                   echo "Connecting to ${{ inputs.EC2_PUBLIC_IP }}"
 
+            - name: Debug SSH
+              run: |
+                if [ -z "${{ secrets.EC2_SSH_KEY }}" ]; then
+                  echo "SSH key is missing or empty"
+                  exit 1
+                else
+                  echo "SSH key is present"
+                fi
+
+
             - name: SSH to EC2 and Deploy Docker Container
               uses: appleboy/ssh-action@v0.1.10
               with:
@@ -50,6 +60,7 @@ jobs:
                     cd $HOME_DIR/platform
                     docker compose pull
                     docker compose up -d --build
+
 
 
 
