@@ -16,6 +16,15 @@ resource "aws_security_group_rule" "ec2_practice_SGingress" {
     cidr_blocks = ["0.0.0.0/0"]  
 }
 
+resource "aws_security_group_rule" "ec2_practice_httpingress" {
+    security_group_id = aws_security_group.ec2_practice_SG.id
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  
+}
+
 resource "aws_security_group_rule" "ec2_practice_SGegress" {
     security_group_id = aws_security_group.ec2_practice_SG.id
     type = "egress"
@@ -23,4 +32,5 @@ resource "aws_security_group_rule" "ec2_practice_SGegress" {
     to_port = 0
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]  
+
 }
