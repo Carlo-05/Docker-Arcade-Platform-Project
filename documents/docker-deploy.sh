@@ -107,6 +107,6 @@ else
     echo "Unsupported OS: $OS"
     exit 1
 fi
-
+mv /tmp/platform ./
 echo "Docker installation complete!"
 
