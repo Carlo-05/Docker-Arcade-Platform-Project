@@ -53,6 +53,9 @@ jobs:
             #ec2 tag
             TF_VAR_ec2_practice_tag: ${{ vars.EC2_PRACTICE_TAG }}
 
+        outputs:
+            EC2_PUBLIC_IP: ${{ steps.ec2_ip.outputs.EC2_PUBLIC_IP }}
+            
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v4
@@ -90,6 +93,7 @@ jobs:
               run: |
                 echo "EC2_PUBLIC_IP=$(terraform output -raw ec2_docker_public_ip)"
                 echo "EC2_PUBLIC_IP = $EC2_PUBLIC_IP" >> $GITHUB_OUTPUT
+
 
 
 
