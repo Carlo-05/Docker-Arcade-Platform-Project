@@ -42,13 +42,13 @@
 - **Dev:**
 
     <div align="left">
-    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Architect-002.png?raw=true" alt="DEV"style="width: 40%; height: auto;">
+    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Architect-002.png?raw=true" alt="DEV"style="width: 60%; height: auto;">
     </div>
  
 - **Container Diagram:**
 
     <div align="left">
-    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Architect-003.png?raw=true" alt="PROD"style="width: 40%; height: auto;">
+    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Architect-003.png?raw=true" alt="PROD"style="width: 60%; height: auto;">
     </div>
  
 ## **Actual Project Presentation:**
