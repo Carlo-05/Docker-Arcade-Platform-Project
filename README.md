@@ -17,6 +17,7 @@
 #### *Note: Some services may incur costs beyond AWS Free Tier account limits. Please keep this in mind.*
 ## **Purpose:**
 -	To demonstrate:
+	- building images using Docker Buildx native builder and uploading it to Docker Hub repository.
     - to define and orchestrate multiple containers (games + NGINX) in a single configuration file called docker-compose.
     - create OpenID Connect (OIDC) which is a secure identity protocol that lets external systems (like GitHub Actions) authenticate with AWS without storing long-lived access keys. Instead, AWS trusts tokens issued by the OIDC provider to grant temporary IAM role credentials.
     - The use of GitHub Actions as a CI/CD platform for infrastructure provisioning.
@@ -53,12 +54,12 @@
 ## **Actual Project Presentation:**
 -   Platform:
     <div align="left">
-    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Final_001.png?raw=true" alt="Execute"style="width: 40%; height: auto;">
+    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Final_001.png?raw=true" alt="Execute"style="width: 60%; height: auto;">
     </div> 
 
 -   Games:
     <div align="left">
-    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Final_006.png?raw=true" alt="Execute"style="width: 40%; height: auto;">
+    <img src="https://github.com/Carlo-05/Docker-Arcade-Platform-Project/blob/main/documents/pictures/Final_006.png?raw=true" alt="Execute"style="width: 60%; height: auto;">
     </div> 
 
 
